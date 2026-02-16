@@ -2,8 +2,17 @@ syntax = "proto3";
 
 package imageprocessing;
 
+option go_package = "imageprocessing/";
+
+import "google/api/annotations.proto";
+
 service ImageProcessingService {
-  rpc ProcessImage (ImageProcessingRequest) returns (ImageProcessingResponse);
+  rpc ProcessImage (ImageProcessingRequest) returns (ImageProcessingResponse) {
+    option (google.api.http) = {
+      post: "/v1/image/process"
+      body: "*"
+    };
+  }
 }
 
 // Request message containing the image and desired operations.

@@ -1,0 +1,223 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "image_processing.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ImageProcessingService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/image/process": {
+      "post": {
+        "operationId": "ImageProcessingService_ProcessImage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/imageprocessingImageProcessingResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Request message containing the image and desired operations.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/imageprocessingImageProcessingRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImageProcessingService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "imageprocessingConvertGrayscale": {
+      "type": "object",
+      "description": "Convert the image to grayscale."
+    },
+    "imageprocessingFlipHorizontal": {
+      "type": "object",
+      "description": "Flip the image along the horizontal axis (top-bottom mirror)."
+    },
+    "imageprocessingFlipVertical": {
+      "type": "object",
+      "description": "Flip the image along the vertical axis (left-right mirror)."
+    },
+    "imageprocessingImageOperation": {
+      "type": "object",
+      "properties": {
+        "flipHorizontal": {
+          "$ref": "#/definitions/imageprocessingFlipHorizontal"
+        },
+        "flipVertical": {
+          "$ref": "#/definitions/imageprocessingFlipVertical"
+        },
+        "rotateDegrees": {
+          "$ref": "#/definitions/imageprocessingRotateDegrees"
+        },
+        "convertGrayscale": {
+          "$ref": "#/definitions/imageprocessingConvertGrayscale"
+        },
+        "resize": {
+          "$ref": "#/definitions/imageprocessingResize"
+        },
+        "thumbnail": {
+          "$ref": "#/definitions/imageprocessingThumbnail"
+        },
+        "rotateLeft": {
+          "$ref": "#/definitions/imageprocessingRotateLeft"
+        },
+        "rotateRight": {
+          "$ref": "#/definitions/imageprocessingRotateRight"
+        }
+      },
+      "description": "Wrapper for a single operation using oneof to support different parameter shapes."
+    },
+    "imageprocessingImageProcessingRequest": {
+      "type": "object",
+      "properties": {
+        "inputImage": {
+          "type": "string",
+          "format": "byte",
+          "title": "Raw image file bytes"
+        },
+        "inputFormat": {
+          "type": "string",
+          "title": "e.g. \"JPEG\", \"PNG\" (optional, auto-detected if omitted)"
+        },
+        "outputFormat": {
+          "type": "string",
+          "title": "Desired output format (defaults to input format)"
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/imageprocessingImageOperation"
+          },
+          "title": "Ordered list of transformations to apply"
+        }
+      },
+      "description": "Request message containing the image and desired operations."
+    },
+    "imageprocessingImageProcessingResponse": {
+      "type": "object",
+      "properties": {
+        "outputImage": {
+          "type": "string",
+          "format": "byte",
+          "title": "Processed image file bytes"
+        },
+        "outputFormat": {
+          "type": "string",
+          "title": "Format of the output image"
+        },
+        "width": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Width of the output image in pixels"
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Height of the output image in pixels"
+        }
+      },
+      "description": "Response message containing the processed image and metadata."
+    },
+    "imageprocessingResize": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "description": "Resize the image to exact dimensions."
+    },
+    "imageprocessingRotateDegrees": {
+      "type": "object",
+      "properties": {
+        "angle": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "description": "Rotate the image by an arbitrary angle in degrees (counter-clockwise)."
+    },
+    "imageprocessingRotateLeft": {
+      "type": "object",
+      "description": "Rotate the image 90 degrees counter-clockwise."
+    },
+    "imageprocessingRotateRight": {
+      "type": "object",
+      "description": "Rotate the image 90 degrees clockwise."
+    },
+    "imageprocessingThumbnail": {
+      "type": "object",
+      "properties": {
+        "maxWidth": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxHeight": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "description": "Generate a thumbnail that fits within the given bounds while preserving aspect ratio."
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
