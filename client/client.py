@@ -37,6 +37,8 @@ def main():
 
     input_path = sys.argv[1]
     output_path = sys.argv[2] if len(sys.argv) > 2 else "output.png"
+    
+    
 
     if not os.path.exists(input_path):
         print(f"Error: file not found: {input_path}")
@@ -63,7 +65,7 @@ def main():
 
     print(f"Sending {input_path} ({len(image_bytes)} bytes) with {len(operations)} operations...")
     response = process_image(
-        stub, image_bytes, operations, output_format="PNG"
+        stub, image_bytes, operations, input_format="JPEG", output_format="PNG"
     )
 
     with open(output_path, "wb") as f:
