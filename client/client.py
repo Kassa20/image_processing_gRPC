@@ -37,9 +37,10 @@ def main():
 
     input_path = sys.argv[1]
     output_path = sys.argv[2] if len(sys.argv) > 2 else "output.png"
-    
-    
+    user_commands = sys.argv[1:]
+    operations = []
 
+    
     if not os.path.exists(input_path):
         print(f"Error: file not found: {input_path}")
         sys.exit(1)
@@ -47,18 +48,46 @@ def main():
     with open(input_path, "rb") as f:
         image_bytes = f.read()
 
+    for command in user_commands:
+        if command == 'rotate_right':
+             operations.append(image_processing_pb2.ImageOperation(
+                rotate_right=image_processing_pb2.RotateRight()
+            ))
+        elif command == 'rotate_left':
+            operations.append(image_processing_pb2.ImageOperation(
+                rotate_left=image_processing_pb2.RotateLeft()
+            ))
+        elif command == 'convert_grayscale':
+            operations.append(image_processing_pb2.ImageOperation(
+                convert_grayscale=image_processing_pb2.ConvertGrayscale()
+            ))
+        elif command == 'flip_vertical':
+            operations.append(image_processing_pb2.ImageOperation(
+                flip_vertical=image_processing_pb2.FlipVertical()
+            )) 
+        elif command == 'flip_horizontal':
+            operations.append(image_processing_pb2.ImageOperation(
+                flip_horizontal=image_processing_pb2.FlipHorizontal()
+            )) 
+        elif command == 'rotate_degrees':
+            operations.append(image_processing_pb2.ImageOperation(
+                rotate_degrees=image_processing_pb2.RotateDegrees()
+            )) 
+        
+
+
     # Build a sample pipeline: rotate right, convert to grayscale, thumbnail
-    operations = [
-        image_processing_pb2.ImageOperation(
-            rotate_right=image_processing_pb2.RotateRight()
-        )
-        # image_processing_pb2.ImageOperation(
-        #     convert_grayscale=image_processing_pb2.ConvertGrayscale()
-        # ),
-        # image_processing_pb2.ImageOperation(
-        #     thumbnail=image_processing_pb2.Thumbnail(max_width=256, max_height=256)
-        # ),
-    ]
+    # operations = [
+    #     image_processing_pb2.ImageOperation(
+    #         rotate_right=image_processing_pb2.RotateRight()
+    #     )
+    #     # image_processing_pb2.ImageOperation(
+    #     #     convert_grayscale=image_processing_pb2.ConvertGrayscale()
+    #     # ),
+    #     # image_processing_pb2.ImageOperation(
+    #     #     thumbnail=image_processing_pb2.Thumbnail(max_width=256, max_height=256)
+    #     # ),
+    # ]
 
     channel = create_channel()
     stub = image_processing_pb2_grpc.ImageProcessingServiceStub(channel)
