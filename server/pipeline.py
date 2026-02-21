@@ -1,4 +1,7 @@
 from server import image_operations as operations
+from PIL import Image
+
+
 
 def build(user_operations):
     commands = []
@@ -20,12 +23,24 @@ def build(user_operations):
             commands.append(operations.flip_horizontal)
         elif operation_type == "rotate_degrees":
             commands.append(operations.rotate_degrees(45))
-
+        elif operation_type == "thumbnail":
+            commands.append(operations.thumbnail(300, 300))
 
     return commands
 
 
-def execute_commands(image, commands):
+def execute_commands(image: Image.Image, commands):
+    thumbnail = image.copy()
     for transform in commands:
-        image = transform(image)
-    return image
+        if transform == operations.thumbnail:
+            thumbnail = transform(image)
+        else:
+            image = transform(image)
+
+    return image, thumbnail
+
+
+
+
+
+

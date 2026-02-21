@@ -75,4 +75,5 @@ message ImageProcessingResponse {
   string output_format = 2;           // Format of the output image
   int32 width = 3;                     // Width of the output image in pixels
   int32 height = 4;                    // Height of the output image in pixels
+  bytes thumbnail_image = 5;
 }

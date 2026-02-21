@@ -39,7 +39,7 @@ class ImageProcessingServicer(image_processing_pb2_grpc.ImageProcessingServiceSe
             return image_processing_pb2.ImageProcessingResponse()
 
         try:
-            image = execute_commands(image, commands)
+            image, thumbnail = execute_commands(image, commands)
         except Exception as exc:
             context.set_code(grpc.StatusCode.INTERNAL)
             context.set_details(f"Pipeline execution failed: {exc}")
@@ -48,8 +48,10 @@ class ImageProcessingServicer(image_processing_pb2_grpc.ImageProcessingServiceSe
             image = image.convert("RGB")
         
         buffer = io.BytesIO()
+        thumb_buffer = io.BytesIO()
         try:
             image.save(buffer, format=output_format)
+            thumbnail.save(thumb_buffer, format=output_format)
         except Exception as exc:
             context.set_code(grpc.StatusCode.INTERNAL)
             context.set_details(f"Cannot encode image as {output_format}: {exc}")
@@ -67,4 +69,6 @@ class ImageProcessingServicer(image_processing_pb2_grpc.ImageProcessingServiceSe
             output_format=output_format,
             width=image.width,
             height=image.height,
+            thumbnail_image=thumb_buffer.getvalue(),
         )
+    
