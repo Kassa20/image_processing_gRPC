@@ -48,10 +48,13 @@ class ImageProcessingServicer(image_processing_pb2_grpc.ImageProcessingServiceSe
             image = image.convert("RGB")
         
         buffer = io.BytesIO()
-        thumb_buffer = io.BytesIO()
+        thumb_bytes = b""
+        if thumbnail is not None:
+            thumb_buffer = io.BytesIO()
+            thumbnail.save(thumb_buffer, format=output_format)
+            thumb_bytes = thumb_buffer.getvalue()
         try:
             image.save(buffer, format=output_format)
-            thumbnail.save(thumb_buffer, format=output_format)
         except Exception as exc:
             context.set_code(grpc.StatusCode.INTERNAL)
             context.set_details(f"Cannot encode image as {output_format}: {exc}")
@@ -69,6 +72,6 @@ class ImageProcessingServicer(image_processing_pb2_grpc.ImageProcessingServiceSe
             output_format=output_format,
             width=image.width,
             height=image.height,
-            thumbnail_image=thumb_buffer.getvalue(),
+            thumbnail_image=thumb_bytes,
         )
     

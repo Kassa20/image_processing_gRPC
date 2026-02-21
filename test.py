@@ -1,15 +1,19 @@
 
 import sys
 
+def test(a, b):
+    
+    if a == 1 and b == 1:
+        return a, b
 
+    return a
 
 def main():
 
-    first = sys.argv[0]
-    list = sys.argv[1:]
+    a = 1
+    b = 1
 
-    print(first)
-    print(list)
+    print(test(a, b))
 
 
 if __name__ == '__main__':

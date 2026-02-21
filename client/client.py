@@ -73,7 +73,10 @@ def main():
             operations.append(image_processing_pb2.ImageOperation(
                 rotate_degrees=image_processing_pb2.RotateDegrees()
             )) 
-        
+        elif command == 'thumbnail':
+            operations.append(image_processing_pb2.ImageOperation(
+                thumbnail=image_processing_pb2.Thumbnail()
+            )) 
 
     channel = create_channel()
     stub = image_processing_pb2_grpc.ImageProcessingServiceStub(channel)

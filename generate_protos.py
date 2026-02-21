@@ -18,9 +18,11 @@ def generate():
     for output_dir in output_dirs:
         os.makedirs(output_dir, exist_ok=True)
 
+        third_party_dir = os.path.join(os.path.dirname(__file__), "third_party")
         cmd = [
             sys.executable, "-m", "grpc_tools.protoc",
             f"--proto_path={proto_dir}",
+            f"--proto_path={third_party_dir}",
             f"--python_out={output_dir}",
             f"--pyi_out={output_dir}",
             f"--grpc_python_out={output_dir}",
