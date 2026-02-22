@@ -10,11 +10,10 @@ def test(a, b):
 
 def main():
 
-    a = 1
-    b = 1
+    input_file = sys.argv[1]
 
-    print(test(a, b))
-
+    with open(input_file, 'r') as f:
+        commands = [line.strip() for line in f if line.strip()]
 
 if __name__ == '__main__':
     main()

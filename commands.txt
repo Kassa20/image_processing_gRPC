@@ -1,6 +1,2 @@
-##server
-python -m grpc_tools.protoc -I protos -I third_party --python_out=server/generated --grpc_python_out=server/generated protos/image_processing.proto
-
-
-##client
- python -m grpc_tools.protoc -I protos -I third_party --python_out=client/generated --grpc_python_out=client/generated protos/image_processing.proto
+rotate_left 
+rotate_degrees 30
