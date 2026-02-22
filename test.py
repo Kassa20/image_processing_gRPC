@@ -15,5 +15,9 @@ def main():
     with open(input_file, 'r') as f:
         commands = [line.strip() for line in f if line.strip()]
 
+    for command in commands:
+        command = command.split(" ")
+        print(command)
+
 if __name__ == '__main__':
     main()

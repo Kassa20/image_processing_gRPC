@@ -1,2 +1,2 @@
-rotate_left 
-rotate_degrees 30
+rotate_degrees -30
+convert_grayscale

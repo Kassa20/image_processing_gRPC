@@ -37,7 +37,7 @@ def main():
 
     input_path = sys.argv[1]
     output_path = sys.argv[2] if len(sys.argv) > 2 else "output.png"
-    user_commands = sys.argv[1:]
+    command_file = sys.argv[3]
     operations = []
 
     
@@ -47,33 +47,38 @@ def main():
 
     with open(input_path, "rb") as f:
         image_bytes = f.read()
+    with open(command_file, "r") as f:
+        user_commands = [line.strip() for line in f if line.strip()]
+    
+    print(user_commands)
 
     for command in user_commands:
-        if command == 'rotate_right':
+        command = command.split(" ")
+        if command[0] == 'rotate_right':
              operations.append(image_processing_pb2.ImageOperation(
                 rotate_right=image_processing_pb2.RotateRight()
             ))
-        elif command == 'rotate_left':
+        elif command[0] == 'rotate_left':
             operations.append(image_processing_pb2.ImageOperation(
                 rotate_left=image_processing_pb2.RotateLeft()
             ))
-        elif command == 'convert_grayscale':
+        elif command[0] == 'convert_grayscale':
             operations.append(image_processing_pb2.ImageOperation(
                 convert_grayscale=image_processing_pb2.ConvertGrayscale()
             ))
-        elif command == 'flip_vertical':
+        elif command[0] == 'flip_vertical':
             operations.append(image_processing_pb2.ImageOperation(
                 flip_vertical=image_processing_pb2.FlipVertical()
             )) 
-        elif command == 'flip_horizontal':
+        elif command[0] == 'flip_horizontal':
             operations.append(image_processing_pb2.ImageOperation(
                 flip_horizontal=image_processing_pb2.FlipHorizontal()
             )) 
-        elif command == 'rotate_degrees':
+        elif command[0] == 'rotate_degrees':
             operations.append(image_processing_pb2.ImageOperation(
-                rotate_degrees=image_processing_pb2.RotateDegrees()
-            )) 
-        elif command == 'thumbnail':
+                rotate_degrees=image_processing_pb2.RotateDegrees(angle=int(command[1]))
+            ))
+        elif command[0] == 'thumbnail':
             operations.append(image_processing_pb2.ImageOperation(
                 thumbnail=image_processing_pb2.Thumbnail()
             )) 

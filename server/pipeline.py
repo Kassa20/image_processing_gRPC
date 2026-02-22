@@ -22,7 +22,7 @@ def build(user_operations):
         elif operation_type == "flip_horizontal":
             commands.append(("n", operations.flip_horizontal))
         elif operation_type == "rotate_degrees":
-            commands.append(operations.rotate_degrees(45))
+            commands.append(("n", operations.rotate_degrees(op.rotate_degrees.angle)))
         elif operation_type == "thumbnail":
             commands.append(("thumb", operations.thumbnail(300, 300)))
 
