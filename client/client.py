@@ -78,6 +78,10 @@ def main():
             operations.append(image_processing_pb2.ImageOperation(
                 rotate_degrees=image_processing_pb2.RotateDegrees(angle=int(command[1]))
             ))
+        elif command[0] == 'resize':
+            operations.append(image_processing_pb2.ImageOperation(
+                resize=image_processing_pb2.Resize(percent=int(command[1]))
+            ))
         elif command[0] == 'thumbnail':
             operations.append(image_processing_pb2.ImageOperation(
                 thumbnail=image_processing_pb2.Thumbnail()
@@ -88,7 +92,7 @@ def main():
 
     print(f"Sending {input_path} ({len(image_bytes)} bytes) with {len(operations)} operations...")
     response = process_image(
-        stub, image_bytes, operations, input_format="JPEG", output_format="PNG"
+        stub, image_bytes, operations, input_format="GIF", output_format="GIF"
     )
 
     with open(output_path, "wb") as f:

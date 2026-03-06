@@ -1,2 +1,3 @@
-rotate_degrees -30
 convert_grayscale
+resize 120
+rotate_degrees -30

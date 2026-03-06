@@ -58,12 +58,10 @@ class ConvertGrayscale(_message.Message):
     def __init__(self) -> None: ...
 
 class Resize(_message.Message):
-    __slots__ = ("width", "height")
-    WIDTH_FIELD_NUMBER: _ClassVar[int]
-    HEIGHT_FIELD_NUMBER: _ClassVar[int]
-    width: int
-    height: int
-    def __init__(self, width: _Optional[int] = ..., height: _Optional[int] = ...) -> None: ...
+    __slots__ = ("percent",)
+    PERCENT_FIELD_NUMBER: _ClassVar[int]
+    percent: int
+    def __init__(self, percent: _Optional[int] = ...) -> None: ...
 
 class Thumbnail(_message.Message):
     __slots__ = ("max_width", "max_height")

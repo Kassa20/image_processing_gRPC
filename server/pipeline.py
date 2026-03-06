@@ -1,5 +1,5 @@
 from server import image_operations as operations
-from PIL import Image
+from PIL import Image, ImageSequence
 
 
 
@@ -23,6 +23,8 @@ def build(user_operations):
             commands.append(("n", operations.flip_horizontal))
         elif operation_type == "rotate_degrees":
             commands.append(("n", operations.rotate_degrees(op.rotate_degrees.angle)))
+        elif operation_type == "resize":
+            commands.append(("n", operations.resize(op.resize.percent)))
         elif operation_type == "thumbnail":
             commands.append(("thumb", operations.thumbnail(300, 300)))
 
@@ -31,14 +33,29 @@ def build(user_operations):
 
 def execute_commands(image: Image.Image, commands):
     thumbnail = None
-    for command in commands:
-        transform = command[1]
-        if command[0] == "thumb":
-            thumbnail = transform(image)
-        else:
-            image = transform(image)
+    n_frames = getattr(image, 'n_frames', 1)
 
-    return image, thumbnail
+    if n_frames > 1:
+        frames = []
+        durations = []
+        for frame in ImageSequence.Iterator(image):
+            frame = frame.copy()
+            durations.append(frame.info.get('duration', 100))
+            for command in commands:
+                if command[0] == "thumb":
+                    thumbnail = command[1](frame)
+                else:
+                    frame = command[1](frame)
+            frames.append(frame)
+        return frames[0], thumbnail, frames[1:], durations
+    else:
+        for command in commands:
+            transform = command[1]
+            if command[0] == "thumb":
+                thumbnail = transform(image)
+            else:
+                image = transform(image)
+        return image, thumbnail, [], []
 
 
 

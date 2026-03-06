@@ -1,0 +1,2 @@
+to run server: python -m server.server
+to run client: python -m client.client input_image output_image(variable_name) list_of_commands

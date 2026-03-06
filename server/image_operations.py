@@ -30,9 +30,11 @@ def convert_grayscale(image: Image.Image) -> Image.Image:
     return image.convert("L").convert("RGB")
 
 
-def resize(width: int, height: int):
-    """Return a function that resizes the image to exact *width* x *height*."""
+def resize(percent: int):
+    """Return a function that resizes the image."""
     def _resize(image: Image.Image) -> Image.Image:
+        height = int(image.height * (percent / 100))
+        width = int(image.width * (percent / 100))
         return image.resize((width, height), Image.Resampling.LANCZOS)
     return _resize
 

@@ -25,7 +25,7 @@ _sym_db = _symbol_database.Default()
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16image_processing.proto\x12\x0fimageprocessing\x1a\x1cgoogle/api/annotations.proto\"\x8f\x01\n\x16ImageProcessingRequest\x12\x13\n\x0binput_image\x18\x01 \x01(\x0c\x12\x14\n\x0cinput_format\x18\x02 \x01(\t\x12\x15\n\routput_format\x18\x03 \x01(\t\x12\x33\n\noperations\x18\x04 \x03(\x0b\x32\x1f.imageprocessing.ImageOperation\"\xd1\x03\n\x0eImageOperation\x12:\n\x0f\x66lip_horizontal\x18\x01 \x01(\x0b\x32\x1f.imageprocessing.FlipHorizontalH\x00\x12\x36\n\rflip_vertical\x18\x02 \x01(\x0b\x32\x1d.imageprocessing.FlipVerticalH\x00\x12\x38\n\x0erotate_degrees\x18\x03 \x01(\x0b\x32\x1e.imageprocessing.RotateDegreesH\x00\x12>\n\x11\x63onvert_grayscale\x18\x04 \x01(\x0b\x32!.imageprocessing.ConvertGrayscaleH\x00\x12)\n\x06resize\x18\x05 \x01(\x0b\x32\x17.imageprocessing.ResizeH\x00\x12/\n\tthumbnail\x18\x06 \x01(\x0b\x32\x1a.imageprocessing.ThumbnailH\x00\x12\x32\n\x0brotate_left\x18\x07 \x01(\x0b\x32\x1b.imageprocessing.RotateLeftH\x00\x12\x34\n\x0crotate_right\x18\x08 \x01(\x0b\x32\x1c.imageprocessing.RotateRightH\x00\x42\x0b\n\toperation\"\x10\n\x0e\x46lipHorizontal\"\x0e\n\x0c\x46lipVertical\"\x1e\n\rRotateDegrees\x12\r\n\x05\x61ngle\x18\x01 \x01(\x01\"\x12\n\x10\x43onvertGrayscale\"\'\n\x06Resize\x12\r\n\x05width\x18\x01 \x01(\x05\x12\x0e\n\x06height\x18\x02 \x01(\x05\"2\n\tThumbnail\x12\x11\n\tmax_width\x18\x01 \x01(\x05\x12\x12\n\nmax_height\x18\x02 \x01(\x05\"\x0c\n\nRotateLeft\"\r\n\x0bRotateRight\"~\n\x17ImageProcessingResponse\x12\x14\n\x0coutput_image\x18\x01 \x01(\x0c\x12\x15\n\routput_format\x18\x02 \x01(\t\x12\r\n\x05width\x18\x03 \x01(\x05\x12\x0e\n\x06height\x18\x04 \x01(\x05\x12\x17\n\x0fthumbnail_image\x18\x05 \x01(\x0c\x32\x99\x01\n\x16ImageProcessingService\x12\x7f\n\x0cProcessImage\x12\'.imageprocessing.ImageProcessingRequest\x1a(.imageprocessing.ImageProcessingResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\"\x11/v1/image/process:\x01*B\x12Z\x10imageprocessing/b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16image_processing.proto\x12\x0fimageprocessing\x1a\x1cgoogle/api/annotations.proto\"\x8f\x01\n\x16ImageProcessingRequest\x12\x13\n\x0binput_image\x18\x01 \x01(\x0c\x12\x14\n\x0cinput_format\x18\x02 \x01(\t\x12\x15\n\routput_format\x18\x03 \x01(\t\x12\x33\n\noperations\x18\x04 \x03(\x0b\x32\x1f.imageprocessing.ImageOperation\"\xd1\x03\n\x0eImageOperation\x12:\n\x0f\x66lip_horizontal\x18\x01 \x01(\x0b\x32\x1f.imageprocessing.FlipHorizontalH\x00\x12\x36\n\rflip_vertical\x18\x02 \x01(\x0b\x32\x1d.imageprocessing.FlipVerticalH\x00\x12\x38\n\x0erotate_degrees\x18\x03 \x01(\x0b\x32\x1e.imageprocessing.RotateDegreesH\x00\x12>\n\x11\x63onvert_grayscale\x18\x04 \x01(\x0b\x32!.imageprocessing.ConvertGrayscaleH\x00\x12)\n\x06resize\x18\x05 \x01(\x0b\x32\x17.imageprocessing.ResizeH\x00\x12/\n\tthumbnail\x18\x06 \x01(\x0b\x32\x1a.imageprocessing.ThumbnailH\x00\x12\x32\n\x0brotate_left\x18\x07 \x01(\x0b\x32\x1b.imageprocessing.RotateLeftH\x00\x12\x34\n\x0crotate_right\x18\x08 \x01(\x0b\x32\x1c.imageprocessing.RotateRightH\x00\x42\x0b\n\toperation\"\x10\n\x0e\x46lipHorizontal\"\x0e\n\x0c\x46lipVertical\"\x1e\n\rRotateDegrees\x12\r\n\x05\x61ngle\x18\x01 \x01(\x01\"\x12\n\x10\x43onvertGrayscale\"\x19\n\x06Resize\x12\x0f\n\x07percent\x18\x01 \x01(\x05\"2\n\tThumbnail\x12\x11\n\tmax_width\x18\x01 \x01(\x05\x12\x12\n\nmax_height\x18\x02 \x01(\x05\"\x0c\n\nRotateLeft\"\r\n\x0bRotateRight\"~\n\x17ImageProcessingResponse\x12\x14\n\x0coutput_image\x18\x01 \x01(\x0c\x12\x15\n\routput_format\x18\x02 \x01(\t\x12\r\n\x05width\x18\x03 \x01(\x05\x12\x0e\n\x06height\x18\x04 \x01(\x05\x12\x17\n\x0fthumbnail_image\x18\x05 \x01(\x0c\x32\x99\x01\n\x16ImageProcessingService\x12\x7f\n\x0cProcessImage\x12\'.imageprocessing.ImageProcessingRequest\x1a(.imageprocessing.ImageProcessingResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\"\x11/v1/image/process:\x01*B\x12Z\x10imageprocessing/b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -48,15 +48,15 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_CONVERTGRAYSCALE']._serialized_start=753
   _globals['_CONVERTGRAYSCALE']._serialized_end=771
   _globals['_RESIZE']._serialized_start=773
-  _globals['_RESIZE']._serialized_end=812
-  _globals['_THUMBNAIL']._serialized_start=814
-  _globals['_THUMBNAIL']._serialized_end=864
-  _globals['_ROTATELEFT']._serialized_start=866
-  _globals['_ROTATELEFT']._serialized_end=878
-  _globals['_ROTATERIGHT']._serialized_start=880
-  _globals['_ROTATERIGHT']._serialized_end=893
-  _globals['_IMAGEPROCESSINGRESPONSE']._serialized_start=895
-  _globals['_IMAGEPROCESSINGRESPONSE']._serialized_end=1021
-  _globals['_IMAGEPROCESSINGSERVICE']._serialized_start=1024
-  _globals['_IMAGEPROCESSINGSERVICE']._serialized_end=1177
+  _globals['_RESIZE']._serialized_end=798
+  _globals['_THUMBNAIL']._serialized_start=800
+  _globals['_THUMBNAIL']._serialized_end=850
+  _globals['_ROTATELEFT']._serialized_start=852
+  _globals['_ROTATELEFT']._serialized_end=864
+  _globals['_ROTATERIGHT']._serialized_start=866
+  _globals['_ROTATERIGHT']._serialized_end=879
+  _globals['_IMAGEPROCESSINGRESPONSE']._serialized_start=881
+  _globals['_IMAGEPROCESSINGRESPONSE']._serialized_end=1007
+  _globals['_IMAGEPROCESSINGSERVICE']._serialized_start=1010
+  _globals['_IMAGEPROCESSINGSERVICE']._serialized_end=1163
 # @@protoc_insertion_point(module_scope)
