@@ -44,12 +44,18 @@ def main():
     if not os.path.exists(input_path):
         print(f"Error: file not found: {input_path}")
         sys.exit(1)
+    if not os.path.exists(command_file):
+        print(f"Error: file not found: {command_file}")
+        sys.exit(1)
 
+    
     with open(input_path, "rb") as f:
         image_bytes = f.read()
+        if len(image_bytes) > _MAX_MESSAGE_SIZE:
+            print(f"Error: image too large ({len(image_bytes) // (1024*1024)} mb, max: {_MAX_MESSAGE_SIZE // (1024*1024)} mb)")
+            sys.exit(1)
     with open(command_file, "r") as f:
         user_commands = [line.strip() for line in f if line.strip()]
-    
     print(user_commands)
 
     for command in user_commands:
@@ -89,6 +95,7 @@ def main():
 
     channel = create_channel()
     stub = image_processing_pb2_grpc.ImageProcessingServiceStub(channel)
+
 
     print(f"Sending {input_path} ({len(image_bytes)} bytes) with {len(operations)} operations...")
     response = process_image(
