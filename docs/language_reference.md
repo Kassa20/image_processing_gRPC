@@ -68,7 +68,7 @@ bytes   = (* raw binary image bytes, base-64 encoded in JSON *) ;
 
 Field         | Required | Type | Default Description
 
-`input_image` | **yes** | bytes | — Raw image file  
+`input_image` | **yes** | bytes | — Raw image file | needs to be **500 x 700** and less than **16MB**
  `input_format` | no | string | auto-detected Hint for the decoder. Ignored if image bytes are valid.  
  `output_format`| no | string | same as input format Format used to encode the result (e.g. `"PNG"`).  
  `operations` | **yes** | list | `[]` (no-op) Ordered pipeline of image transformations.

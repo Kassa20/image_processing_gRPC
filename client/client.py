@@ -1,8 +1,11 @@
 
+import io
 import os
 import sys
+import time
 
 import grpc
+from PIL import Image
 
 from client.generated import image_processing_pb2, image_processing_pb2_grpc
 
@@ -54,6 +57,14 @@ def main():
         if len(image_bytes) > _MAX_MESSAGE_SIZE:
             print(f"Error: image too large ({len(image_bytes) // (1024*1024)} mb, max: {_MAX_MESSAGE_SIZE // (1024*1024)} mb)")
             sys.exit(1)
+
+    img = Image.open(io.BytesIO(image_bytes))
+    if img.width > 500 or img.height > 700:
+        img = img.resize((500, 700), Image.Resampling.LANCZOS)
+        buf = io.BytesIO()
+        img.save(buf, format=img.format or "JPEG")
+        image_bytes = buf.getvalue()
+        print(f"Image resized to 500x700 before sending")
     with open(command_file, "r") as f:
         user_commands = [line.strip() for line in f if line.strip()]
     print(user_commands)
@@ -98,9 +109,12 @@ def main():
 
 
     print(f"Sending {input_path} ({len(image_bytes)} bytes) with {len(operations)} operations...")
+    start_time = time.time()
     response = process_image(
-        stub, image_bytes, operations, input_format="GIF", output_format="GIF"
+        stub, image_bytes, operations, input_format="JPEG", output_format="PNG"
     )
+    elapsed_ms = (time.time() - start_time) * 1000
+    print(f"Response received in {elapsed_ms:.2f} ms")
 
     with open(output_path, "wb") as f:
         f.write(response.output_image)
