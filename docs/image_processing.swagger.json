@@ -148,23 +148,19 @@
     "imageprocessingResize": {
       "type": "object",
       "properties": {
-        "width": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "height": {
+        "percent": {
           "type": "integer",
           "format": "int32"
         }
       },
-      "description": "Resize the image to exact dimensions."
+      "description": "Resize the image by percent."
     },
     "imageprocessingRotateDegrees": {
       "type": "object",
       "properties": {
         "angle": {
           "type": "number",
-          "format": "double"
+          "format": "int32"
         }
       },
       "description": "Rotate the image by an arbitrary angle in degrees (counter-clockwise)."
