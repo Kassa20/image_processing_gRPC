@@ -1,2 +1,1 @@
-resize 130
 rotate_degrees -30
