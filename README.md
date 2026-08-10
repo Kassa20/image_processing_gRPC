@@ -1,5 +1,7 @@
 # Image Processing Language Reference
 
+<img width="750" height="545" alt="image" src="https://github.com/user-attachments/assets/ae2aa0c3-9005-4ad5-a02c-002a1b4f2f00" />
+
 ## Overview
 
 The image processing service accepts a request describing an input image and an ordered
