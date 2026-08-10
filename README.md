@@ -1,6 +1,6 @@
 # Image Processing Language Reference
 
-<img width="750" height="545" alt="image" src="https://github.com/user-attachments/assets/ae2aa0c3-9005-4ad5-a02c-002a1b4f2f00" />
+<img width="490" height="345" alt="image" src="https://github.com/user-attachments/assets/ae2aa0c3-9005-4ad5-a02c-002a1b4f2f00" />
 
 ## Overview
 
